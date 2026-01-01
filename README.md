@@ -41,32 +41,26 @@ O repositório simula um cenário real de validação de APIs REST, contemplando
 ## 📂 Estrutura do Projeto
 
 ```
-playwright-api-validation/
+PLAYWRIGHT-API-TESTS/
 │
-├── tests/
-│ ├── api/
-│ │ ├── auth.spec.ts # Testes relacionados à autenticação
-│ │ ├── users.spec.ts # Testes de endpoints de usuários
-│ │ └── products.spec.ts # Testes de endpoints de produtos
-│ │
-│ ├── utils/
-│ │ └── apiClient.ts # Cliente HTTP reutilizável
-│ │
-│ └── test-setup.ts # Configurações globais de testes
+├── .github/
 │
 ├── config/
-│ ├── playwright.config.ts # Configurações do Playwright
-│ └── env.config.ts # Configurações de ambiente
+│   └── env.config.ts              # Configurações de ambiente
 │
-├── data/
-│ ├── users.json # Massa de dados para testes
-│ └── testData.json
+├── data/                          # Massa de dados para testes
 │
-├── reports/ # Relatórios gerados automaticamente
+├── node_modules/                  # Dependências do projeto
 │
-├── package.json
-├── tsconfig.json
-└── README.md
+├── tests/
+│   ├── api/                       # Testes de endpoints (autenticação, usuários, produtos etc.)
+│   └── utils/                     # Funções utilitárias (ex: cliente HTTP, helpers)
+│
+├── package-lock.json
+├── package.json                   # Dependências e scripts npm
+├── playwright.config.ts           # Configuração principal do Playwright
+├── README.md                      # Documentação do projeto
+└── tsconfig.json                  # Configuração do TypeScript
 ```
 
 ---
