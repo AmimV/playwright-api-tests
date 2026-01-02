@@ -1,0 +1,14 @@
+{
+  "validUser": {
+    "username": "emilys",
+    "password": "emilyspass",
+    "email": "emily.johnson@x.dummyjson.com",
+    "firstName": "Emily",
+    "lastName": "Johnson",
+    "gender": "female"
+  },
+  "invalidUser": {
+    "username": "wronguser",
+    "password": "wrongpass"
+  }
+}

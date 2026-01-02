@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { ApiClient } from '../utils/apiClient';
-import { AUTH_CREDENTIALS } from '../../config/env.config';
+import { User } from '../../types/user';
+import users from '../../data/users.json';
 
-// Escopo global da suíte de autenticação
 test.describe('Authentication API', () => {
   let apiClient: ApiClient;
   let authToken: string;
@@ -18,12 +18,8 @@ test.describe('Authentication API', () => {
     await apiClient.close();
   });
 
-  // Caso de teste: login válido deve retornar token e status 200
   test('should successfully authenticate and return a valid token', async () => {
-    const payload = {
-      username: AUTH_CREDENTIALS.username,
-      password: AUTH_CREDENTIALS.password,
-    };
+    const payload: User = users.validUser;
 
     const response = await apiClient.post('/auth/login', payload);
     expect(response.status()).toBe(200);
@@ -34,6 +30,10 @@ test.describe('Authentication API', () => {
     expect(body).toHaveProperty('accessToken');
     expect(body.accessToken).toBeTruthy();
     expect(body.username).toBe(payload.username);
+    expect(body.email).toBe(payload.email);
+    expect(body.firstName).toBe(payload.firstName);
+    expect(body.lastName).toBe(payload.lastName);
+    expect(body.gender).toBe(payload.gender);
 
     // Armazena o token para reuso
     authToken = body.accessToken;
@@ -43,8 +43,8 @@ test.describe('Authentication API', () => {
   // Caso de teste: login inválido deve retornar erro 400
   test('should fail to authenticate with invalid credentials', async () => {
     const invalidPayload = {
-      username: 'wrongUser',
-      password: 'wrongPass',
+      username: users.invalidUser.username,
+      password: users.invalidUser.password,
     };
 
     const response = await apiClient.post('/auth/login', invalidPayload);
